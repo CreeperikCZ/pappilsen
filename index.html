@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="cs" style="scroll-padding-top: 100px; scroll-behavior: smooth;">
+<head style="background-color: #333333;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jan Wild">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!--Bootstrap--><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Bootstrap--><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--jQuery--><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--font--><link href="https://fonts.cdnfonts.com/css/bahamas-2" rel="stylesheet">
+    <link rel="icon" type="image/png" href="ikona.png">
+
+    <title>PAP Pilsen</title>
+    <style>
+        /* Výchozí barva odkazů v menu */
+        .menu-link {
+            color: rgba(255, 255, 255, 0.6) !important;
+            transition: color 0.3s ease;
+        }
+
+        /* Barva aktivního odkazu při scrollování */
+        .menu-link.active {
+            color: #dc3545 !important;
+            font-weight: bold;
+        }
+        .iframe-kalendare {
+            filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll("article[id], section[id], div[id]");
+            const navLinks = document.querySelectorAll(".menu-link");
+
+            function updateActiveLink() {
+                const scrollPosition = window.scrollY + 100;
+                let currentId = "";
+
+                // 1. Zjistíme, jestli uživatel není až na samém dně stránky
+                const isAtBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50;
+
+                if (isAtBottom && navLinks.length > 0) {
+                    // Pokud jsme na konci, natvrdo vezmeme poslední odkaz (Kontakt)
+                    currentId = navLinks[navLinks.length - 1].getAttribute("href").substring(1);
+                } else {
+                    // Jinak standardně prohledáváme sekce podle pozice
+                    sections.forEach((section) => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.offsetHeight;
+
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                            currentId = section.getAttribute("id");
+                        }
+                    });
+                }
+
+                // Pojistka pro úplný začátek stránky
+                if (!currentId && window.scrollY < 200 && navLinks.length > 0) {
+                    currentId = navLinks[0].getAttribute("href").substring(1);
+                }
+
+                // Rozsvícení správného odkazu
+                if (currentId) {
+                    navLinks.forEach((link) => {
+                        const hrefId = link.getAttribute("href").substring(1);
+                        if (hrefId === currentId) {
+                            link.classList.add("active");
+                        } else {
+                            link.classList.remove("active");
+                        }
+                    });
+                }
+            }
+
+            // Spustit při scrollování a načtení
+            window.addEventListener("scroll", updateActiveLink);
+            updateActiveLink();
+
+            // Ošetření okamžitého rozsvícení po kliknutí
+            navLinks.forEach((link) => {
+                link.addEventListener("click", function () {
+                    navLinks.forEach(l => l.classList.remove("active"));
+                    this.classList.add("active");
+                });
+            });
+        });
+    </script>
+</head>
+<body id="domu">
+    <header class="container-fluid p-1 text-white text-center shadow-sm" style="background-color: #222222;">
+        <div class="row align-items-center" style="width: 100%;">
+            <!-- Změněno z width: 10vw na min-width a max-width, aby se na mobilu nezmenšovalo -->
+            <span class="col-sm text-center">
+                <img src="logo.png" class="float-start p-2" style="width: 150px; max-width: 100%; height: auto;" alt="...">
+            </span>
+            
+            <nav class="col-sm-5 row text-right">
+                <a href="#domu" class="col nav-link menu-link active">DOMŮ</a>
+                <a href="#rezervace" class="col nav-link menu-link">REZERVACE</a>
+                <a href="#kontakt" class="col nav-link menu-link">KONTAKT</a>
+            </nav>
+        </div>
+    </header>
+    <header class="container-fluid p-1 text-white text-center fixed-top shadow-sm" style="background-color: #222222;">
+        <div class="row align-items-center" style="width: 100%;">
+            <!-- Změněno z width: 10vw na min-width a max-width, aby se na mobilu nezmenšovalo -->
+            <span class="col-sm text-center">
+                <img src="logo.png" class="float-start p-2" style="width: 150px; max-width: 100%; height: auto;" alt="...">
+            </span>
+            
+            <nav class="col-sm-5 row text-right">
+                <a href="#domu" class="col nav-link menu-link active">DOMŮ</a>
+                <a href="#rezervace" class="col nav-link menu-link">REZERVACE</a>
+                <a href="#kontakt" class="col nav-link menu-link">KONTAKT</a>
+            </nav>
+        </div>
+    </header>
+
+    <section style="background-color: #333333;">
+        <div class="text-center">
+            <img style="width: 60%;" src="pap2.png" class="img-fluid" alt="Obrázek">
+        </div>
+        <article  class="container pt-2"> <!--Trenéři-->
+            <h2 class="h2 text-danger text-center pt-3">Naši trenéři</h2>
+            <section class="row align-items-center">
+                <div class="col-md-4 mb-3">
+                    <div class="card text-white" style=" background-color: #000000;">
+                        <img src="https://picsum.photos/401/400" class="card-img-top p-2" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Honza</h5>
+                            <p class="card-text">Popis</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card text-white" style=" background-color: #000000;">
+                        <img src="https://picsum.photos/400/400" class="card-img-top p-2" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Matěj</h5>
+                            <p class="card-text">Popis</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card text-white" style=" background-color: #000000;">
+                        <img src="https://picsum.photos/400/401" class="card-img-top p-2" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Pepa</h5>
+                            <p class="card-text">Popis</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+            </section>
+        </article>
+
+        <article class="container pt-2" id="rezervace"> <!--Rezervace-->
+            <h2 class="h2 text-danger text-center">Rezervace</h2>
+            <div class="row">
+                
+                <section style="background-color: #000000; margin: 0;" class="rounded col row">
+                    <iframe class="col-lg-8 p-2 rounded iframe-kalendare" src="https://calendar.google.com/calendar/embed?height=601&wkst=2&ctz=Europe%2FPrague&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&src=amFud2lsZDE1OUBnbWFpbC5jb20&src=YThmZGNhMjYxMzUzNzY3ZDI0YjA3ZDQ2MjhiM2YzZjg4NGEwN2Q5N2FlNDRhNjg5YmVmYjgxNTdmMmZmNGUwZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzVhODMwZWVlMzk3NjAyM2I1MWNlN2Q5ZjkyYWI3N2FkNTgxZTZhMzkxNzBiZWQxMzYzYjRlMmNlNzM1M2MyOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y3MuY3plY2gjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039be5&color=%23d81b60&color=%237986cb&color=%000000" style="border-width:0"; width="max-width"; height="500px"; frameborder="0" scrolling="no"></iframe>
+                    <section class="col-lg-4 text-white text-center">
+                        <table style="height: 100%; width: 100%;"><tbody><tr>
+                            <td class="align-middle">
+                                <p class="align-middle h4">Telefon: <a type="phone">+420 777 350 093</a></p>
+                                <p class="align-middle h4">Email: <a type="email">pap.pilsen@gmail.com</a></p>
+                            </td>
+                        </tr></tbody></table>
+                    </section>
+                </section>
+                
+            </div>
+        </article>
+
+        <article class="container pt-5 pb-4" style="padding-left: 0; padding-right: 0;">
+            <!-- CSS styly pro galerii -->
+            <style>
+                .gallery-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                .gallery-rows-wrapper {
+                    min-height: 100%;
+                }
+            </style>
+
+            <!-- FOTO -->
+            <div class="row g-3 align-items-stretch">
+                
+                <!-- LEVÁ ČÁST -->
+                <div class="col-lg-8">
+                    <div class="d-flex flex-column h-100 justify-content-between gap-3 gallery-rows-wrapper">
+                        
+                        <div class="row g-3 flex-fill">
+                            <div class="col-md-4">
+                                <img src="https://picsum.photos/400/400" alt="Fotka" class="gallery-img rounded shadow-sm">
+                            </div>
+                            <div class="col-md-8">
+                                <img src="https://picsum.photos/800/400" alt="Fotka" class="gallery-img rounded shadow-sm">
+                            </div>
+                        </div>
+
+                        
+                        <div class="row g-3 flex-fill">
+                            <div class="col-12">
+                                <img src="banner2.jpg" alt="banner" class="gallery-img rounded shadow-sm">
+                            </div>
+                        </div>
+
+                        
+                        <div class="row g-3 flex-fill">
+                            <div class="col-md-7">
+                                <img src="https://picsum.photos/700/400" alt="Fotka" class="gallery-img rounded shadow-sm">
+                            </div>
+                            <div class="col-md-5">
+                                <img src="https://picsum.photos/500/400" alt="Fotka" class="gallery-img rounded shadow-sm">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                        
+                <!-- PRAVÁ ČÁST-->
+                <div class="col-lg-4">
+                    <img class="h-100 d-flex flex-column rounded" style="width: 100%;" alt="banner" src="banner.jpg">
+                </div>
+
+            </div>
+        </article>
+
+        <article class="container" id="kontakt"> <!--Kontakt-->
+            <h2 class="h2 text-danger text-center">Kontakt</h2>
+            <div class="row">
+                <section style="background-color: #000000; margin: 0;" class="rounded col row ">
+                    <section class="col-md-4 text-white text-center">
+                        <table style="height: 100%;width: 100%;"><tbody><tr>
+                            <td class="col align-items-center pt-2">
+                                <p class="h5">Gerská 34, Plzeň 1 - Bolevec</p>
+                                <p class="h5">Telefon: <a type="phone">+420 777 350 093</a></p>
+                                <p class="h5">Email: <a type="email">pap.pilsen@gmail.com</a></p>
+                                <p class="h5">IČO:</p>
+                                <p></p>
+                                <p class="h5">Provozní doba:</p>
+                            </td>
+                        </tr></tbody></table>
+                    </section>
+                    <iframe class="col-md-8 p-2 rounded" style="border:none" src="https://mapy.com/s/fetanevanu" width="max-width"; height="500px"; frameborder="0"></iframe>
+                </section>
+            </div>
+        </article>
+        <br>
+    </section>
+    <footer class="text-center text-lg-start mt-auto" style="background-color: #000000;">
+        <!-- Copyright -->
+        <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2026 Copyright:
+            <a class="text-white" href="">PAP Pilsen</a>
+        </div>
+    </footer>
+</body>
+</html>
