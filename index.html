@@ -14,7 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
     <title>PAP Pilsen</title>
     <style>
-        /* Výchozí barva odkazů v menu */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
         .menu-link {
             color: rgba(255, 255, 255, 0.6) !important;
             transition: color 0.3s ease;
@@ -28,23 +31,22 @@
         .iframe-kalendare {
             filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
         }
+        .pap-font{
+            text-transform: uppercase;
+        }
         .athletic-text {
-            /* Správný široký font */
+            
             font-family: 'Michroma', sans-serif;
             font-size: 110%;
             text-transform: uppercase;
             
-            /* Výrazné mezery mezi písmeny */
             letter-spacing: 18px; 
             
-            /* Umělé naklonění písma (sklon doprava), protože Michroma nemá italic verzi */
             transform: skewX(-15deg);
-            display: inline-block; /* Nutné pro správné fungování transformace */
+            display: inline-block; 
             
-            /* Základní barva plochy písmene (tmavší červená) */
             color: #dc3545; 
             
-            /* Vylepšený 3D efekt - odlesky a stíny */
             text-shadow: 
                 -1px -1px 0px #f25362,
                 -2px -2px 3px rgba(214, 50, 66, 0.4), 
@@ -54,12 +56,12 @@
         }
         @media (max-width: 690px) {
             .athletic-text {
-                font-size: 1.2rem;     /* Výrazně zmenšené písmo */
-                letter-spacing: 6px;   /* Zmenšené rozestupy, aby se slova nerozpadla */
+                font-size: 1.2rem;     
+                letter-spacing: 6px;   
                 text-shadow: 
                     -1px -1px 0px #f25362,
                     1px 1px 0px #240003,
-                    3px 3px 5px rgba(0, 0, 0, 0.9); /* Trochu menší stín pro malé písmo */
+                    3px 3px 5px rgba(0, 0, 0, 0.9);
             }
         }
     </style>
@@ -122,7 +124,7 @@
         });
     </script>
 </head>
-<body id="domu" style="background-color: #222222;">
+<body id="domu" style="background-color: #333333;">
     <header class="container-fluid p-1 text-white text-center shadow-sm" style="background-color: #222222;">
         <div class="row align-items-center" style="width: 100%;">
             <!-- Změněno z width: 10vw na min-width a max-width, aby se na mobilu nezmenšovalo -->
@@ -131,34 +133,34 @@
             </span>
             
             <nav class="col-sm-5 row text-right">
-                <a href="#domu" class="col nav-link menu-link active">DOMŮ</a>
-                <a href="#rezervace" class="col nav-link menu-link">REZERVACE</a>
-                <a href="#kontakt" class="col nav-link menu-link">KONTAKT</a>
+                <a href="#domu" class="pap-font col nav-link menu-link active">DOMŮ</a>
+                <a href="#rezervace" class="pap-font col nav-link menu-link">REZERVACE</a>
+                <a href="#kontakt" class="pap-font col nav-link menu-link">KONTAKT</a>
             </nav>
         </div>
     </header>
     <header class="container-fluid p-1 text-white text-center fixed-top shadow-sm" style="background-color: #222222;">
-        <div class="row align-items-center" style="width: 100%;">
+        <div class="row align-items-center" style="width: 100vw; margin: 0;">
             <!-- Změněno z width: 10vw na min-width a max-width, aby se na mobilu nezmenšovalo -->
             <span class="col-sm text-center">
                 <img src="logo.png" class="float-start p-2" style="width: 150px; max-width: 100%; height: auto;" alt="...">
             </span>
             
-            <nav class="col-sm-5 row text-right">
-                <a href="#domu" class="col nav-link menu-link active">DOMŮ</a>
-                <a href="#rezervace" class="col nav-link menu-link">REZERVACE</a>
-                <a href="#kontakt" class="col nav-link menu-link">KONTAKT</a>
+            <nav class="col-sm-5 row text-right" style="padding: 0; margin: 0;">
+                <a href="#domu" class="pap-font col nav-link menu-link active">DOMŮ</a>
+                <a href="#rezervace" class="pap-font col nav-link menu-link">REZERVACE</a>
+                <a href="#kontakt" class="pap-font col nav-link menu-link">KONTAKT</a>
             </nav>
         </div>
     </header>
 
     <section style="background-color: #333333;">
-        <div class="text-center">
+        <div class="text-center"> <!--AP-->
             <h3 class="athletic-text pt-4 ml-1">Athletic Performance</h3><br>
             <img style="width: 800px" src="pap2.png" class="img-fluid" alt="Obrázek">
         </div>
         <article  class="container pt-2"> <!--Trenéři-->
-            <h2 class="h2 text-danger text-center pt-3">Naši trenéři</h2>
+            <h2 class="pap-font h2 text-danger text-center pt-3">Naši trenéři</h2>
             <section class="row align-items-center">
                 <div class="col-md-4 mb-3">
                     <div class="card text-white" style=" background-color: #000000;">
@@ -196,7 +198,7 @@
         </article>
 
         <article class="container pt-2" id="rezervace"> <!--Rezervace-->
-            <h2 class="h2 text-danger text-center">Rezervace</h2>
+            <h2 class="pap-font h2 text-danger text-center">Rezervace</h2>
             <div class="row">
                 
                 <section style="background-color: #000000; margin: 0;" class="rounded col row">
@@ -232,7 +234,7 @@
                 <div class="col-lg-8">
                     <div class="d-flex flex-column h-100 justify-content-between gap-3 gallery-rows-wrapper">
                         
-                        <div class="row g-3 flex-fill">
+                        <div class="row g-3 flex-fill"> <!--První řada-->
                             <div class="col-md-4">
                                 <img src="https://picsum.photos/400/400" alt="Fotka" class="gallery-img rounded shadow-sm">
                             </div>
@@ -242,14 +244,14 @@
                         </div>
 
                         
-                        <div class="row g-3 flex-fill">
+                        <div class="row g-3 flex-fill"> <!--Druhá řada-->
                             <div class="col-12">
                                 <img src="banner2.jpg" alt="banner" class="gallery-img rounded shadow-sm">
                             </div>
                         </div>
 
                         
-                        <div class="row g-3 flex-fill">
+                        <div class="row g-3 flex-fill" > <!--Třetí řada-->
                             <div class="col-md-7">
                                 <img src="https://picsum.photos/700/400" alt="Fotka" class="gallery-img rounded shadow-sm">
                             </div>
@@ -270,7 +272,7 @@
         </article>
 
         <article class="container" id="kontakt"> <!--Kontakt-->
-            <h2 class="h2 text-danger text-center">Kontakt</h2>
+            <h2 class="pap-font h2 text-danger text-center">Kontakt</h2>
             <div class="row">
                 <section style="background-color: #000000; margin: 0;" class="rounded col row ">
                     <section class="col-md-4 text-white text-center">
